@@ -7,8 +7,15 @@ namespace WindowsFormsAppMusicPad
         public string path { get; set; }
         public string name { get; set; }
         public string ButtonName { get; set; }
+        public byte note { get; set; }
 
-        public TrackName(string pth, string butName) { path = pth; name = Path.GetFileNameWithoutExtension(pth); ButtonName = butName; }
+        public TrackName(string pth, string butName, byte note)
+        {
+            path = pth; 
+            name = Path.GetFileNameWithoutExtension(pth); 
+            ButtonName = butName;
+            this.note = note;
+        }
         public override string ToString()
         {
             return $"{name}";

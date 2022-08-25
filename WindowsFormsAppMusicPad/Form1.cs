@@ -13,26 +13,31 @@ namespace WindowsFormsAppMusicPad
     {
         //private static WMPLib.WindowsMediaPlayer Player1 = new WMPLib.WindowsMediaPlayer();
         //private static WMPLib.WindowsMediaPlayer Player2 = new WMPLib.WindowsMediaPlayer();
-        private static WMPLib.WindowsMediaPlayer Player1;
-        private static WMPLib.WindowsMediaPlayer Player2;
+        public static WMPLib.WindowsMediaPlayer Player1;
+        public static WMPLib.WindowsMediaPlayer Player2;
 
         private MidiInMessageEventArgs ChangeEvent;
         private MidiIn midiIn;
         private string midiDeviceName = "None";
         private int midiDeviceIndex = -1;
-        private int buttonNumber = 0;
-        private int keyStop = 16;
-        private int midiController = 100;
+        private int noteNumber = 0;
+        private int keyStop = 127;
+        private int midiController = 100; //Volume control
+        private static int value = 127;
 
-        List<TrackName> trackNames = new List<TrackName>();
-        string PlayFile = "";
-        int trans = 2;
+        public static List<TrackName> trackNames = new List<TrackName>();
+        public static string PlayFile = "";
+        private static int trans = 2;
+        private static Button playBytton;
+
         public Form1()
         {
             InitializeComponent();
 
             Player1 = new WindowsMediaPlayer();
             Player2 = new WindowsMediaPlayer();
+            playBytton = new Button();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,20 +81,22 @@ namespace WindowsFormsAppMusicPad
             {
                 label1.Invoke((MethodInvoker)delegate ()
                 {
-                    buttonNumber = (((NoteEvent)e.MidiEvent).NoteNumber + 1);
-                    label1.Text = "Note " + buttonNumber;
-                    if (buttonNumber == keyStop)
+                    noteNumber = (((NoteEvent)e.MidiEvent).NoteNumber);
+                    label1.Text = "Note " + noteNumber;
+                    if (noteNumber == keyStop)
                     {
                         PlayStop_Click(sender, new EventArgs());
                         return;
                     }
-                    foreach (var item in panel1.Controls)
+
+                    foreach (var item in trackNames)
                     {
-                        if ((item as Button).AccessibleName == buttonNumber.ToString())
+                        if(item.note == noteNumber)
                         {
-                            button1_Click((item as Button), new EventArgs());
+                            playBytton.Text = item.name;
+                            button1_Click(playBytton, new EventArgs());
                         }
-                    }
+                    }    
                 });
             }
             else
@@ -120,18 +127,20 @@ namespace WindowsFormsAppMusicPad
             Location = new Point((Size)Location - (Size)MouseHook + (Size)e.Location);
         }
 
-        private void button1_DragEnter(object sender, DragEventArgs e)
+        public static void button1_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
         }
-        private void button1_DragDrop(object sender, DragEventArgs e)
+
+        public static void button1_DragDrop(object sender, DragEventArgs e)
         {
             string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
-            trackNames.Add(new TrackName(file[0], (sender as Button).Name));
+            trackNames.Add(new TrackName(file[0],(sender as Button).Name, byte.Parse((sender as Button).AccessibleName)));
             (sender as Button).Text = Path.GetFileNameWithoutExtension(file[0]);
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        public static void button1_Click(object sender, EventArgs e)
         {
             if (PlayFile == (sender as Button).Text) return;
 
@@ -143,7 +152,7 @@ namespace WindowsFormsAppMusicPad
                         Player2.URL = item.path;
                         Player2.controls.play();
                         PlayFile = item.name;
-                        for (int i = 0, j = trackBar1.Value; i < trackBar1.Value; i++, j--)
+                        for (int i = 0, j = value; i < value; i++, j--)
                         {
                             Player2.settings.volume = i;
                             Player1.settings.volume = j;
@@ -160,7 +169,7 @@ namespace WindowsFormsAppMusicPad
                         Player1.URL = item.path;
                         Player1.controls.play();
                         PlayFile = item.name;
-                        for (int i = 0, j = trackBar1.Value; i < trackBar1.Value; i++, j--)
+                        for (int i = 0, j = value; i < value; i++, j--)
                         {
                             Player1.settings.volume = i;
                             Player2.settings.volume = j;
@@ -195,11 +204,11 @@ namespace WindowsFormsAppMusicPad
 
             }
         }
-        private void PlayStop_Click(object sender, EventArgs e)
+        public static void PlayStop_Click(object sender, EventArgs e)
         {
             if (Player1.playState == WMPPlayState.wmppsPlaying || Player2.playState == WMPPlayState.wmppsPlaying)
             {
-                for (int j = trackBar1.Value; j > 0; j--)
+                for (int j = value; j > 0; j--)
                 {
                     Player2.settings.volume = j;
                     Player1.settings.volume = j;
@@ -213,8 +222,8 @@ namespace WindowsFormsAppMusicPad
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            Player1.settings.volume = trackBar1.Value;
-            Player2.settings.volume = trackBar1.Value;
+            Player1.settings.volume = Player2.settings.volume = trackBar1.Value;
+            label3.Text = trackBar1.Value.ToString();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -305,5 +314,15 @@ namespace WindowsFormsAppMusicPad
             this.Close();
         }
 
+        private void pads_Click(object sender, EventArgs e)
+        {
+            Pads pads = new Pads();
+            pads.Show();
+        }
+
+        private void trackBar1_Scroll_1(object sender, EventArgs e)
+        {
+            value = trackBar1.Value;
+        }
     }
 }
