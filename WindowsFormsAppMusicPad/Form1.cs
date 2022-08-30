@@ -96,6 +96,11 @@ namespace WindowsFormsAppMusicPad
                         {
                             playBytton.Text = item.name;
                             button1_Click(playBytton, new EventArgs());
+                            foreach(Button btn in panel1.Controls)
+                            {
+                                if (btn.Text == item.name)
+                                    btn.Focus();
+                            } 
                         }
                     }
                 });
@@ -183,7 +188,6 @@ namespace WindowsFormsAppMusicPad
                             Player2.controls.stop();
                         }
                     }
-            (sender as Button).Focus();
             }
             catch (Exception ex)
             {
@@ -233,7 +237,6 @@ namespace WindowsFormsAppMusicPad
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             Player1.settings.volume = Player2.settings.volume = value = trackBar1.Value;
-
             label3.Text = trackBar1.Value.ToString();
         }
 
@@ -344,9 +347,11 @@ namespace WindowsFormsAppMusicPad
             isPadsFormOpen = true;
         }
 
-        private void trackBar1_Scroll_1(object sender, EventArgs e)
+
+        private void button6_ContextMenuStripChanged(object sender, EventArgs e)
         {
-            value = trackBar1.Value;
+            (sender as Button).Text = "clear";
         }
+
     }
 }
