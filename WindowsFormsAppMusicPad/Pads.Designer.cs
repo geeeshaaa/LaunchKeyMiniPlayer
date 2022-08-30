@@ -102,7 +102,8 @@
             // 
             // pad2
             // 
-            this.pad2.AccessibleDescription = "75";
+            this.pad2.AccessibleDescription = "";
+            this.pad2.AccessibleName = "75";
             this.pad2.AllowDrop = true;
             this.pad2.BackColor = System.Drawing.Color.Magenta;
             this.pad2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -329,6 +330,7 @@
             this.MinimumSize = new System.Drawing.Size(699, 188);
             this.Name = "Pads";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Pads_FormClosing);
             this.Load += new System.EventHandler(this.Pads_Load_1);
             this.tableLayoutPanelPads.ResumeLayout(false);
             this.ResumeLayout(false);

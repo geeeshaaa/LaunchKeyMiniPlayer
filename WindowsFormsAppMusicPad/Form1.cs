@@ -29,6 +29,8 @@ namespace WindowsFormsAppMusicPad
         public static string PlayFile = "";
         private static int trans = 2;
         private static Button playBytton;
+        private static Pads padsForm;
+        public static bool isPadsFormOpen = false;
 
         public Form1()
         {
@@ -37,7 +39,6 @@ namespace WindowsFormsAppMusicPad
             Player1 = new WindowsMediaPlayer();
             Player2 = new WindowsMediaPlayer();
             playBytton = new Button();
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -91,12 +92,12 @@ namespace WindowsFormsAppMusicPad
 
                     foreach (var item in trackNames)
                     {
-                        if(item.note == noteNumber)
+                        if (item.note == noteNumber)
                         {
                             playBytton.Text = item.name;
                             button1_Click(playBytton, new EventArgs());
                         }
-                    }    
+                    }
                 });
             }
             else
@@ -107,7 +108,7 @@ namespace WindowsFormsAppMusicPad
                 {
                     label3.Invoke((MethodInvoker)delegate ()
                     {
-                        Player1.settings.volume = Player2.settings.volume = trackBar1.Value = cce.ControllerValue;
+                        Player1.settings.volume = Player2.settings.volume = trackBar1.Value = value = cce.ControllerValue;
                         label3.Text = cce.ControllerValue.ToString();
                     });
                 }
@@ -135,50 +136,59 @@ namespace WindowsFormsAppMusicPad
 
         public static void button1_DragDrop(object sender, DragEventArgs e)
         {
+            var res = trackNames.Find(track => track.note == byte.Parse((sender as Button).AccessibleName));
+            if (res != null)
+                trackNames.Remove(res);
+
             string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
-            trackNames.Add(new TrackName(file[0],(sender as Button).Name, byte.Parse((sender as Button).AccessibleName)));
+            trackNames.Add(new TrackName(file[0], (sender as Button).Name, byte.Parse((sender as Button).AccessibleName)));
             (sender as Button).Text = Path.GetFileNameWithoutExtension(file[0]);
         }
 
         public static void button1_Click(object sender, EventArgs e)
         {
-            if (PlayFile == (sender as Button).Text) return;
+            try
+            {
+                if (PlayFile == (sender as Button).Text) return;
 
-            if (Player1.playState == WMPPlayState.wmppsPlaying)
-                foreach (var item in trackNames)
-                {
-                    if (item.name == (sender as Button).Text)
+                if (Player1.playState == WMPPlayState.wmppsPlaying)
+                    foreach (var item in trackNames)
                     {
-                        Player2.URL = item.path;
-                        Player2.controls.play();
-                        PlayFile = item.name;
-                        for (int i = 0, j = value; i < value; i++, j--)
+                        if (item.name == (sender as Button).Text)
                         {
-                            Player2.settings.volume = i;
-                            Player1.settings.volume = j;
-                            //Thread.Sleep(trans);
+                            Player2.URL = item.path;
+                            Player2.controls.play();
+                            PlayFile = item.name;
+                            for (int i = 0, j = value; i < value; i++, j--)
+                            {
+                                Player2.settings.volume = i;
+                                Player1.settings.volume = j;
+                            }
+                            Player1.controls.stop();
                         }
-                        Player1.controls.stop();
                     }
-                }
-            else
-                foreach (var item in trackNames)
-                {
-                    if (item.name == (sender as Button).Text)
+                else
+                    foreach (var item in trackNames)
                     {
-                        Player1.URL = item.path;
-                        Player1.controls.play();
-                        PlayFile = item.name;
-                        for (int i = 0, j = value; i < value; i++, j--)
+                        if (item.name == (sender as Button).Text)
                         {
-                            Player1.settings.volume = i;
-                            Player2.settings.volume = j;
-                            //Thread.Sleep(trans);
+                            Player1.URL = item.path;
+                            Player1.controls.play();
+                            PlayFile = item.name;
+                            for (int i = 0, j = value; i < value; i++, j--)
+                            {
+                                Player1.settings.volume = i;
+                                Player2.settings.volume = j;
+                            }
+                            Player2.controls.stop();
                         }
-                        Player2.controls.stop();
                     }
-                }
             (sender as Button).Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -222,7 +232,8 @@ namespace WindowsFormsAppMusicPad
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            Player1.settings.volume = Player2.settings.volume = trackBar1.Value;
+            Player1.settings.volume = Player2.settings.volume = value = trackBar1.Value;
+
             label3.Text = trackBar1.Value.ToString();
         }
 
@@ -240,6 +251,17 @@ namespace WindowsFormsAppMusicPad
                     //if ((item as Button).Text == "Stop") continue;
                     (item as Button).Text = "";
                 }
+            if (isPadsFormOpen)
+            {
+                foreach (var item in padsForm.Controls)
+                {
+                    if (item is TableLayoutPanel)
+                        foreach (var btn in (item as TableLayoutPanel).Controls)
+                        {
+                            (btn as Button).Text = "";
+                        }
+                }
+            }
         }
 
         private void seveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -316,8 +338,10 @@ namespace WindowsFormsAppMusicPad
 
         private void pads_Click(object sender, EventArgs e)
         {
-            Pads pads = new Pads();
-            pads.Show();
+            if (!isPadsFormOpen)
+                padsForm = new Pads();
+            padsForm.Show();
+            isPadsFormOpen = true;
         }
 
         private void trackBar1_Scroll_1(object sender, EventArgs e)

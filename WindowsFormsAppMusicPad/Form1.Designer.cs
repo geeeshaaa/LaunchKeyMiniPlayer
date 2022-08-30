@@ -56,6 +56,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button27 = new System.Windows.Forms.Button();
             this.button20 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
             this.button19 = new System.Windows.Forms.Button();
@@ -92,8 +93,8 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 216F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 88F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 240F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 216F));
             this.tableLayoutPanel1.Controls.Add(this.button25, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.menuStrip1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.button26, 0, 0);
@@ -109,7 +110,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1317, 31);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1412, 31);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             // 
@@ -151,21 +152,21 @@
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // seveToolStripMenuItem
             // 
             this.seveToolStripMenuItem.Name = "seveToolStripMenuItem";
-            this.seveToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.seveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.seveToolStripMenuItem.Text = "Seve";
             this.seveToolStripMenuItem.Click += new System.EventHandler(this.seveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -173,7 +174,7 @@
             // 
             this.topToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.topToolStripMenuItem.Name = "topToolStripMenuItem";
-            this.topToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.topToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.topToolStripMenuItem.Text = "Bot";
             this.topToolStripMenuItem.Click += new System.EventHandler(this.topToolStripMenuItem_Click);
             // 
@@ -210,11 +211,12 @@
             this.PlayStop.TabIndex = 2;
             this.PlayStop.Text = "Stop";
             this.PlayStop.UseVisualStyleBackColor = false;
+            this.PlayStop.Click += new System.EventHandler(PlayStop_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1270, 9);
+            this.label1.Location = new System.Drawing.Point(1199, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(3, 9, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 13);
@@ -278,6 +280,7 @@
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button21);
             this.panel1.Controls.Add(this.button2);
+            this.panel1.Controls.Add(this.button27);
             this.panel1.Controls.Add(this.button20);
             this.panel1.Controls.Add(this.button12);
             this.panel1.Controls.Add(this.button19);
@@ -297,7 +300,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1317, 85);
+            this.panel1.Size = new System.Drawing.Size(1412, 85);
             this.panel1.TabIndex = 1;
             // 
             // button24
@@ -312,9 +315,9 @@
             this.button24.Size = new System.Drawing.Size(94, 42);
             this.button24.TabIndex = 0;
             this.button24.UseVisualStyleBackColor = false;
-            this.button24.Click += new System.EventHandler(Form1.button1_Click);
-            this.button24.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button24.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button24.Click += new System.EventHandler(button1_Click);
+            this.button24.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button24.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button5
             // 
@@ -328,9 +331,9 @@
             this.button5.Size = new System.Drawing.Size(94, 42);
             this.button5.TabIndex = 0;
             this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(Form1.button1_Click);
-            this.button5.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button5.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button5.Click += new System.EventHandler(button1_Click);
+            this.button5.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button5.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button23
             // 
@@ -344,9 +347,9 @@
             this.button23.Size = new System.Drawing.Size(94, 42);
             this.button23.TabIndex = 0;
             this.button23.UseVisualStyleBackColor = false;
-            this.button23.Click += new System.EventHandler(Form1.button1_Click);
-            this.button23.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button23.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button23.Click += new System.EventHandler(button1_Click);
+            this.button23.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button23.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button4
             // 
@@ -360,9 +363,9 @@
             this.button4.Size = new System.Drawing.Size(94, 42);
             this.button4.TabIndex = 0;
             this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(Form1.button1_Click);
-            this.button4.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button4.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button4.Click += new System.EventHandler(button1_Click);
+            this.button4.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button4.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button22
             // 
@@ -376,9 +379,9 @@
             this.button22.Size = new System.Drawing.Size(94, 42);
             this.button22.TabIndex = 0;
             this.button22.UseVisualStyleBackColor = false;
-            this.button22.Click += new System.EventHandler(Form1.button1_Click);
-            this.button22.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button22.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button22.Click += new System.EventHandler(button1_Click);
+            this.button22.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button22.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button3
             // 
@@ -392,9 +395,9 @@
             this.button3.Size = new System.Drawing.Size(94, 42);
             this.button3.TabIndex = 0;
             this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(Form1.button1_Click);
-            this.button3.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button3.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button3.Click += new System.EventHandler(button1_Click);
+            this.button3.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button3.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button21
             // 
@@ -408,9 +411,9 @@
             this.button21.Size = new System.Drawing.Size(94, 42);
             this.button21.TabIndex = 0;
             this.button21.UseVisualStyleBackColor = false;
-            this.button21.Click += new System.EventHandler(Form1.button1_Click);
-            this.button21.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button21.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button21.Click += new System.EventHandler(button1_Click);
+            this.button21.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button21.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button2
             // 
@@ -424,9 +427,24 @@
             this.button2.Size = new System.Drawing.Size(94, 42);
             this.button2.TabIndex = 0;
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(Form1.button1_Click);
-            this.button2.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button2.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button2.Click += new System.EventHandler(button1_Click);
+            this.button2.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button2.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
+            // 
+            // button27
+            // 
+            this.button27.AccessibleName = "72";
+            this.button27.AllowDrop = true;
+            this.button27.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.button27.Location = new System.Drawing.Point(1316, 42);
+            this.button27.Margin = new System.Windows.Forms.Padding(0);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(94, 42);
+            this.button27.TabIndex = 0;
+            this.button27.UseVisualStyleBackColor = false;
+            this.button27.Click += new System.EventHandler(button1_Click);
+            this.button27.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button27.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button20
             // 
@@ -438,9 +456,9 @@
             this.button20.Size = new System.Drawing.Size(94, 42);
             this.button20.TabIndex = 0;
             this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(Form1.button1_Click);
-            this.button20.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button20.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button20.Click += new System.EventHandler(button1_Click);
+            this.button20.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button20.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button12
             // 
@@ -452,9 +470,9 @@
             this.button12.Size = new System.Drawing.Size(94, 42);
             this.button12.TabIndex = 0;
             this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(Form1.button1_Click);
-            this.button12.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button12.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button12.Click += new System.EventHandler(button1_Click);
+            this.button12.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button12.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button19
             // 
@@ -466,9 +484,9 @@
             this.button19.Size = new System.Drawing.Size(94, 42);
             this.button19.TabIndex = 0;
             this.button19.UseVisualStyleBackColor = true;
-            this.button19.Click += new System.EventHandler(Form1.button1_Click);
-            this.button19.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button19.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button19.Click += new System.EventHandler(button1_Click);
+            this.button19.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button19.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button11
             // 
@@ -480,9 +498,9 @@
             this.button11.Size = new System.Drawing.Size(94, 42);
             this.button11.TabIndex = 0;
             this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(Form1.button1_Click);
-            this.button11.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button11.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button11.Click += new System.EventHandler(button1_Click);
+            this.button11.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button11.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button18
             // 
@@ -494,9 +512,9 @@
             this.button18.Size = new System.Drawing.Size(94, 42);
             this.button18.TabIndex = 0;
             this.button18.UseVisualStyleBackColor = true;
-            this.button18.Click += new System.EventHandler(Form1.button1_Click);
-            this.button18.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button18.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button18.Click += new System.EventHandler(button1_Click);
+            this.button18.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button18.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button10
             // 
@@ -508,9 +526,9 @@
             this.button10.Size = new System.Drawing.Size(94, 42);
             this.button10.TabIndex = 0;
             this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(Form1.button1_Click);
-            this.button10.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button10.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button10.Click += new System.EventHandler(button1_Click);
+            this.button10.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button10.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button17
             // 
@@ -522,9 +540,9 @@
             this.button17.Size = new System.Drawing.Size(94, 42);
             this.button17.TabIndex = 0;
             this.button17.UseVisualStyleBackColor = true;
-            this.button17.Click += new System.EventHandler(Form1.button1_Click);
-            this.button17.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button17.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button17.Click += new System.EventHandler(button1_Click);
+            this.button17.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button17.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button9
             // 
@@ -536,9 +554,9 @@
             this.button9.Size = new System.Drawing.Size(94, 42);
             this.button9.TabIndex = 0;
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(Form1.button1_Click);
-            this.button9.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button9.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button9.Click += new System.EventHandler(button1_Click);
+            this.button9.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button9.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button16
             // 
@@ -550,9 +568,9 @@
             this.button16.Size = new System.Drawing.Size(94, 42);
             this.button16.TabIndex = 0;
             this.button16.UseVisualStyleBackColor = true;
-            this.button16.Click += new System.EventHandler(Form1.button1_Click);
-            this.button16.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button16.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button16.Click += new System.EventHandler(button1_Click);
+            this.button16.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button16.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button8
             // 
@@ -564,9 +582,9 @@
             this.button8.Size = new System.Drawing.Size(94, 42);
             this.button8.TabIndex = 0;
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(Form1.button1_Click);
-            this.button8.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button8.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button8.Click += new System.EventHandler(button1_Click);
+            this.button8.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button8.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button15
             // 
@@ -578,9 +596,9 @@
             this.button15.Size = new System.Drawing.Size(94, 42);
             this.button15.TabIndex = 0;
             this.button15.UseVisualStyleBackColor = true;
-            this.button15.Click += new System.EventHandler(Form1.button1_Click);
-            this.button15.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button15.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button15.Click += new System.EventHandler(button1_Click);
+            this.button15.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button15.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button7
             // 
@@ -592,9 +610,9 @@
             this.button7.Size = new System.Drawing.Size(94, 42);
             this.button7.TabIndex = 0;
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(Form1.button1_Click);
-            this.button7.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button7.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button7.Click += new System.EventHandler(button1_Click);
+            this.button7.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button7.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button14
             // 
@@ -607,9 +625,9 @@
             this.button14.Size = new System.Drawing.Size(94, 42);
             this.button14.TabIndex = 0;
             this.button14.UseVisualStyleBackColor = false;
-            this.button14.Click += new System.EventHandler(Form1.button1_Click);
-            this.button14.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button14.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button14.Click += new System.EventHandler(button1_Click);
+            this.button14.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button14.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button13
             // 
@@ -623,9 +641,9 @@
             this.button13.Size = new System.Drawing.Size(94, 42);
             this.button13.TabIndex = 0;
             this.button13.UseVisualStyleBackColor = false;
-            this.button13.Click += new System.EventHandler(Form1.button1_Click);
-            this.button13.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button13.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button13.Click += new System.EventHandler(button1_Click);
+            this.button13.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button13.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button6
             // 
@@ -638,9 +656,9 @@
             this.button6.Size = new System.Drawing.Size(94, 42);
             this.button6.TabIndex = 0;
             this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(Form1.button1_Click);
-            this.button6.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button6.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button6.Click += new System.EventHandler(button1_Click);
+            this.button6.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button6.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // button1
             // 
@@ -654,9 +672,9 @@
             this.button1.Size = new System.Drawing.Size(94, 42);
             this.button1.TabIndex = 0;
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(Form1.button1_Click);
-            this.button1.DragDrop += new System.Windows.Forms.DragEventHandler(Form1.button1_DragDrop);
-            this.button1.DragEnter += new System.Windows.Forms.DragEventHandler(Form1.button1_DragEnter);
+            this.button1.Click += new System.EventHandler(button1_Click);
+            this.button1.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+            this.button1.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
             // 
             // contextMenuStrip1
             // 
@@ -675,7 +693,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1317, 116);
+            this.ClientSize = new System.Drawing.Size(1412, 116);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -741,6 +759,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button pads;
         private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button button27;
     }
 }
 

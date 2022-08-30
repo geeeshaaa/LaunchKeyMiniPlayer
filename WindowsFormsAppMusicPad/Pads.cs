@@ -51,5 +51,9 @@ namespace WindowsFormsAppMusicPad
             Form1.PlayStop_Click(sender, e);
         }
 
+        private void Pads_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form1.isPadsFormOpen = false;
+        }
     }
 }
