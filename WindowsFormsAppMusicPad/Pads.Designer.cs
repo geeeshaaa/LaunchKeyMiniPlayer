@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelPads = new System.Windows.Forms.TableLayoutPanel();
             this.pad1 = new System.Windows.Forms.Button();
             this.pad2 = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@
             this.pad14 = new System.Windows.Forms.Button();
             this.pad15 = new System.Windows.Forms.Button();
             this.pad16 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanelPads.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,6 +101,7 @@
             this.pad1.Click += new System.EventHandler(this.pad1_Click);
             this.pad1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad1.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad2
             // 
@@ -115,6 +118,7 @@
             this.pad2.Click += new System.EventHandler(this.pad1_Click);
             this.pad2.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad2.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad3
             // 
@@ -130,6 +134,7 @@
             this.pad3.Click += new System.EventHandler(this.pad1_Click);
             this.pad3.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad3.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad3.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad4
             // 
@@ -145,6 +150,7 @@
             this.pad4.Click += new System.EventHandler(this.pad1_Click);
             this.pad4.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad4.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad4.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad5
             // 
@@ -160,6 +166,7 @@
             this.pad5.Click += new System.EventHandler(this.pad1_Click);
             this.pad5.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad5.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad6
             // 
@@ -175,6 +182,7 @@
             this.pad6.Click += new System.EventHandler(this.pad1_Click);
             this.pad6.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad6.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad6.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad7
             // 
@@ -190,6 +198,7 @@
             this.pad7.Click += new System.EventHandler(this.pad1_Click);
             this.pad7.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad7.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad7.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad8
             // 
@@ -205,6 +214,7 @@
             this.pad8.Click += new System.EventHandler(this.pad1_Click);
             this.pad8.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad8.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad8.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad9
             // 
@@ -220,6 +230,7 @@
             this.pad9.Click += new System.EventHandler(this.pad1_Click);
             this.pad9.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad9.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad9.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad10
             // 
@@ -235,6 +246,7 @@
             this.pad10.Click += new System.EventHandler(this.pad1_Click);
             this.pad10.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad10.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad10.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad11
             // 
@@ -250,6 +262,7 @@
             this.pad11.Click += new System.EventHandler(this.pad1_Click);
             this.pad11.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad11.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad11.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad12
             // 
@@ -265,6 +278,7 @@
             this.pad12.Click += new System.EventHandler(this.pad1_Click);
             this.pad12.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad12.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad12.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad13
             // 
@@ -280,6 +294,7 @@
             this.pad13.Click += new System.EventHandler(this.pad1_Click);
             this.pad13.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad13.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad13.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad14
             // 
@@ -295,6 +310,7 @@
             this.pad14.Click += new System.EventHandler(this.pad1_Click);
             this.pad14.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad14.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad14.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad15
             // 
@@ -310,6 +326,7 @@
             this.pad15.Click += new System.EventHandler(this.pad1_Click);
             this.pad15.DragDrop += new System.Windows.Forms.DragEventHandler(this.pad1_DragDrop);
             this.pad15.DragEnter += new System.Windows.Forms.DragEventHandler(this.pad1_DragEnter);
+            this.pad15.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pad1_MouseUp);
             // 
             // pad16
             // 
@@ -322,6 +339,12 @@
             this.pad16.TabIndex = 4;
             this.pad16.UseVisualStyleBackColor = false;
             this.pad16.Click += new System.EventHandler(this.pad16_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Pads
             // 
@@ -356,5 +379,6 @@
         private System.Windows.Forms.Button pad14;
         private System.Windows.Forms.Button pad15;
         private System.Windows.Forms.Button pad16;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -13,6 +13,7 @@ namespace WindowsFormsAppMusicPad
 {
     public partial class Pads : Form
     {
+        public static string trackPlay = "";
         public Pads()
         {
             InitializeComponent();
@@ -28,7 +29,6 @@ namespace WindowsFormsAppMusicPad
                         value.Text = item.name;
                 }
             }
-
         }
 
         private void pad1_Click(object sender, EventArgs e)
@@ -54,6 +54,16 @@ namespace WindowsFormsAppMusicPad
         private void Pads_FormClosing(object sender, FormClosingEventArgs e)
         {
             Form1.isPadsFormOpen = false;
+        }
+
+        private void pad1_MouseUp(object sender, MouseEventArgs e)
+        {
+            Form1.button6_MouseUp(sender, e);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Text = trackPlay;
         }
     }
 }

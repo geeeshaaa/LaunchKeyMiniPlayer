@@ -23,7 +23,7 @@ namespace WindowsFormsAppMusicPad
         private int noteNumber = 0;
         private int keyStop = 127;
         private int midiController = 100; //Volume control
-        private static int value = 127;
+        private static int volume = 100;
 
         public static List<TrackName> trackNames = new List<TrackName>();
         public static string PlayFile = "";
@@ -35,6 +35,14 @@ namespace WindowsFormsAppMusicPad
         public Form1()
         {
             InitializeComponent();
+            foreach (Button btn in panel1.Controls)
+            {
+                btn.Click += new System.EventHandler(button1_Click);
+                btn.DragDrop += new System.Windows.Forms.DragEventHandler(button1_DragDrop);
+                btn.DragEnter += new System.Windows.Forms.DragEventHandler(button1_DragEnter);
+                btn.MouseUp += new System.Windows.Forms.MouseEventHandler(button6_MouseUp);
+            }
+            this.PlayStop.Click += new System.EventHandler(PlayStop_Click);
 
             Player1 = new WindowsMediaPlayer();
             Player2 = new WindowsMediaPlayer();
@@ -96,11 +104,14 @@ namespace WindowsFormsAppMusicPad
                         {
                             playBytton.Text = item.name;
                             button1_Click(playBytton, new EventArgs());
-                            foreach(Button btn in panel1.Controls)
+                            foreach (Button btn in panel1.Controls)
                             {
-                                if (btn.Text == item.name)
+                                if (btn.Name == item.ButtonName)
+                                {
                                     btn.Focus();
-                            } 
+                                    return;
+                                }
+                            }
                         }
                     }
                 });
@@ -113,8 +124,9 @@ namespace WindowsFormsAppMusicPad
                 {
                     label3.Invoke((MethodInvoker)delegate ()
                     {
-                        Player1.settings.volume = Player2.settings.volume = trackBar1.Value = value = cce.ControllerValue;
-                        label3.Text = cce.ControllerValue.ToString();
+                        float v = cce.ControllerValue;
+                        Player1.settings.volume = Player2.settings.volume = trackBar1.Value = volume = (int)(v/1.27);
+                        label3.Text = (volume).ToString();
                     });
                 }
             }
@@ -164,7 +176,7 @@ namespace WindowsFormsAppMusicPad
                             Player2.URL = item.path;
                             Player2.controls.play();
                             PlayFile = item.name;
-                            for (int i = 0, j = value; i < value; i++, j--)
+                            for (int i = 0, j = volume; i < volume; i++, j--)
                             {
                                 Player2.settings.volume = i;
                                 Player1.settings.volume = j;
@@ -180,7 +192,7 @@ namespace WindowsFormsAppMusicPad
                             Player1.URL = item.path;
                             Player1.controls.play();
                             PlayFile = item.name;
-                            for (int i = 0, j = value; i < value; i++, j--)
+                            for (int i = 0, j = volume; i < volume; i++, j--)
                             {
                                 Player1.settings.volume = i;
                                 Player2.settings.volume = j;
@@ -193,6 +205,10 @@ namespace WindowsFormsAppMusicPad
             {
                 MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                Player1.settings.volume = Player2.settings.volume = volume;
+            }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -201,6 +217,7 @@ namespace WindowsFormsAppMusicPad
             {
                 PlayFile = "";
                 label2.Text = "00:00";
+                labelTrackName.Text = "";
             }
             else
             {
@@ -209,34 +226,39 @@ namespace WindowsFormsAppMusicPad
                 {
                     label2.Text = $"{((int)(Player1.currentMedia.duration - Player1.controls.currentPosition)) / 60 % 60:d2}:" +
                     $"{((int)(Player1.currentMedia.duration - Player1.controls.currentPosition)) % 60:d2}";
+                    labelTrackName.Text = Path.GetFileNameWithoutExtension(Player1.URL);
                 }
                 if (Player2.playState == WMPPlayState.wmppsPlaying)
                 {
                     label2.Text = $"{((int)(Player2.currentMedia.duration - Player2.controls.currentPosition)) / 60 % 60:d2}:" +
                     $"{((int)(Player2.currentMedia.duration - Player2.controls.currentPosition)) % 60:d2}";
+                    labelTrackName.Text = Path.GetFileNameWithoutExtension(Player2.URL);
                 }
-
+            }
+            if (isPadsFormOpen)
+            {
+                Pads.trackPlay = labelTrackName.Text;
             }
         }
         public static void PlayStop_Click(object sender, EventArgs e)
         {
             if (Player1.playState == WMPPlayState.wmppsPlaying || Player2.playState == WMPPlayState.wmppsPlaying)
             {
-                for (int j = value; j > 0; j--)
+                for (int j = volume; j > 0; j--)
                 {
-                    Player2.settings.volume = j;
-                    Player1.settings.volume = j;
+                    Player1.settings.volume = Player2.settings.volume = j;
                     Thread.Sleep(trans);
                 }
                 Player1.controls.stop();
                 Player2.controls.stop();
                 PlayFile = "";
+                Player1.settings.volume = Player2.settings.volume = volume;
             }
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            Player1.settings.volume = Player2.settings.volume = value = trackBar1.Value;
+            Player1.settings.volume = Player2.settings.volume = volume = trackBar1.Value;
             label3.Text = trackBar1.Value.ToString();
         }
 
@@ -347,10 +369,22 @@ namespace WindowsFormsAppMusicPad
             isPadsFormOpen = true;
         }
 
-
-        private void button6_ContextMenuStripChanged(object sender, EventArgs e)
+        public static void button6_MouseUp(object sender, MouseEventArgs e)
         {
-            (sender as Button).Text = "clear";
+            if ((sender as Button).Text == "") return;
+            if (e.Button == MouseButtons.Right)
+            {
+                var res = MessageBox.Show("Do you want clear this button?", "Clear", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                {
+                    var tr = trackNames.Find(track => track.ButtonName == (sender as Button).Name);
+                    if (tr != null)
+                        trackNames.Remove(tr);
+
+
+                    (sender as Button).Text = "";
+                }
+            }
         }
 
     }
