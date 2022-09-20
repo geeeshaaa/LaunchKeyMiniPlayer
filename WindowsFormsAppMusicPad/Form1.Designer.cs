@@ -76,13 +76,14 @@
             this.button71 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.colorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             panel1.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -159,35 +160,35 @@
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.clearToolStripMenuItem.Text = "Clear_All";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // clearKeyToolStripMenuItem
             // 
             this.clearKeyToolStripMenuItem.Name = "clearKeyToolStripMenuItem";
-            this.clearKeyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearKeyToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.clearKeyToolStripMenuItem.Text = "Clear_Keys";
             this.clearKeyToolStripMenuItem.Click += new System.EventHandler(this.clearKeyToolStripMenuItem_Click);
             // 
             // clearPadsToolStripMenuItem
             // 
             this.clearPadsToolStripMenuItem.Name = "clearPadsToolStripMenuItem";
-            this.clearPadsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearPadsToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.clearPadsToolStripMenuItem.Text = "Clear_Pads";
             this.clearPadsToolStripMenuItem.Click += new System.EventHandler(this.clearPadsToolStripMenuItem_Click);
             // 
             // seveToolStripMenuItem
             // 
             this.seveToolStripMenuItem.Name = "seveToolStripMenuItem";
-            this.seveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.seveToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.seveToolStripMenuItem.Text = "Seve";
             this.seveToolStripMenuItem.Click += new System.EventHandler(this.seveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -195,7 +196,7 @@
             // 
             this.topToolStripMenuItem.ForeColor = System.Drawing.Color.Red;
             this.topToolStripMenuItem.Name = "topToolStripMenuItem";
-            this.topToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.topToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.topToolStripMenuItem.Text = "Bot";
             this.topToolStripMenuItem.Click += new System.EventHandler(this.topToolStripMenuItem_Click);
             // 
@@ -633,16 +634,25 @@
             // 
             // contextMenuStrip1
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.colorToolStripMenuItem,
             this.clearToolStripMenuItem1});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(103, 26);
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new System.Drawing.Size(181, 70);
+            // 
+            // colorToolStripMenuItem
+            // 
+            this.colorToolStripMenuItem.Name = "colorToolStripMenuItem";
+            this.colorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.colorToolStripMenuItem.Text = "Color";
+            this.colorToolStripMenuItem.Click += new System.EventHandler(this.colorToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem1
             // 
             this.clearToolStripMenuItem1.Name = "clearToolStripMenuItem1";
-            this.clearToolStripMenuItem1.Size = new System.Drawing.Size(102, 22);
-            this.clearToolStripMenuItem1.Text = "Clear";
+            this.clearToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem1.Text = "Delete";
+            this.clearToolStripMenuItem1.Click += new System.EventHandler(this.clearToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -663,7 +673,7 @@
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             panel1.ResumeLayout(false);
-            this.contextMenuStrip1.ResumeLayout(false);
+            contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -712,12 +722,13 @@
         private System.Windows.Forms.Button pads;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button72;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem1;
         private System.Windows.Forms.Label labelTrackName;
         private System.Windows.Forms.ToolStripMenuItem clearKeyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearPadsToolStripMenuItem;
-        
+        private System.Windows.Forms.ToolStripMenuItem colorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem1;
+        private static System.Windows.Forms.Panel panel1;
+        private static System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

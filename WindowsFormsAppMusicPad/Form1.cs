@@ -29,13 +29,9 @@ namespace WindowsFormsAppMusicPad
         private static Button playBytton;
         private static Pads padsForm;
         public static bool isPadsFormOpen = false;
-        private static System.Windows.Forms.Panel panel1;
         public Form1()
         {
             InitializeComponent();
-            
-            
-
 
             foreach (Button btn in panel1.Controls)
             {
@@ -169,12 +165,12 @@ namespace WindowsFormsAppMusicPad
             {
                 string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
                 int note = int.Parse((sender as Button).AccessibleName);
-                if (file.Length == 1)
-                {
-                    trackNames.Add(new TrackName(file[0], (sender as Button).Name, note));
-                    (sender as Button).Text = Path.GetFileNameWithoutExtension(file[0]);
-                    return;
-                }
+                //if (file.Length == 1)
+                //{
+                //    trackNames.Add(new TrackName(file[0], (sender as Button).Name, note));
+                //    (sender as Button).Text = Path.GetFileNameWithoutExtension(file[0]);
+                //    return;
+                //}
 
                 if (note >= 48 && note <= 72)
                 {
@@ -193,11 +189,19 @@ namespace WindowsFormsAppMusicPad
                     for (int i = 0; i < file.Length; i++)
                     {
                         trackNames.Add(new TrackName(file[i], "button" + (note + i), note + i));
-                        foreach (var item in panel1.Controls)
+                        foreach (Button btn in panel1.Controls)
                         {
-                            if (int.Parse((item as Button).AccessibleName) == note + i)
+                            if (int.Parse(btn.AccessibleName) == note + i)
                             {
-                                (item as Button).Text = Path.GetFileNameWithoutExtension(file[i]);
+                                btn.Text = Path.GetFileNameWithoutExtension(file[i]);
+                                if (btn.BackColor == Color.FromKnownColor(KnownColor.ControlLightLight) || btn.BackColor == Color.FromKnownColor(KnownColor.Control))
+                                {
+                                    btn.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                                }
+                                else
+                                {
+                                    btn.ForeColor = Color.FromKnownColor(KnownColor.ControlLightLight);
+                                }
                             }
                         }
                     }
@@ -455,16 +459,10 @@ namespace WindowsFormsAppMusicPad
             if ((sender as Button).Text == "") return;
             if (e.Button == MouseButtons.Right)
             {
-                var res = MessageBox.Show("Do you want clear this button?", "Clear", MessageBoxButtons.YesNo);
-                if (res == DialogResult.Yes)
-                {
-                    var tr = trackNames.Find(track => track.ButtonName == (sender as Button).Name);
-                    if (tr != null)
-                        trackNames.Remove(tr);
-
-
-                    (sender as Button).Text = "";
-                }
+                var relativeClickedPosition = e.Location;
+                var screenClickedPosition = (sender as Control).PointToScreen(relativeClickedPosition);
+                contextMenuStrip1.AccessibleDescription = (sender as Button).Name;
+                contextMenuStrip1.Show(screenClickedPosition);
             }
         }
 
@@ -498,6 +496,53 @@ namespace WindowsFormsAppMusicPad
                 {
                     var res = trackNames.Find(track => track.note == i);
                     trackNames.Remove(res);
+                }
+            }
+        }
+
+        private void clearToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var tr = trackNames.Find(track => track.ButtonName == contextMenuStrip1.AccessibleDescription);
+            if (tr != null)
+                trackNames.Remove(tr);
+            foreach (Button button in panel1.Controls)
+            {
+                if (button.Name == contextMenuStrip1.AccessibleDescription)
+                {
+                    button.Text = "";
+                    if (button.BackColor == Color.FromKnownColor(KnownColor.ControlLightLight) || button.BackColor == Color.FromKnownColor(KnownColor.Control))
+                    {
+                        button.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                    }
+                    else
+                    {
+                        button.ForeColor = Color.FromKnownColor(KnownColor.ControlLightLight);
+                    }
+                    return;
+                }
+            }
+            foreach (Button button in Pads.tableLayoutPanelPads.Controls)
+            {
+                if (button.Name == contextMenuStrip1.AccessibleDescription)
+                {
+                    button.Text = "";
+                    button.ForeColor = Color.FromKnownColor(KnownColor.ControlText);
+                    return;
+                }
+            }
+        }
+
+        private void colorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var res = int.Parse(contextMenuStrip1.AccessibleDescription.Substring(6, 2));
+            if (res > 73) return;
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.ShowDialog();
+            foreach (Button button in panel1.Controls)
+            {
+                if (button.Name == contextMenuStrip1.AccessibleDescription)
+                {
+                    button.ForeColor = colorDialog.Color;
                 }
             }
         }
