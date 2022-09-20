@@ -11,8 +11,6 @@ namespace WindowsFormsAppMusicPad
 {
     public partial class Form1 : Form
     {
-        //private static WMPLib.WindowsMediaPlayer Player1 = new WMPLib.WindowsMediaPlayer();
-        //private static WMPLib.WindowsMediaPlayer Player2 = new WMPLib.WindowsMediaPlayer();
         public static WMPLib.WindowsMediaPlayer Player1;
         public static WMPLib.WindowsMediaPlayer Player2;
 
@@ -31,10 +29,14 @@ namespace WindowsFormsAppMusicPad
         private static Button playBytton;
         private static Pads padsForm;
         public static bool isPadsFormOpen = false;
-
+        private static System.Windows.Forms.Panel panel1;
         public Form1()
         {
             InitializeComponent();
+            
+            
+
+
             foreach (Button btn in panel1.Controls)
             {
                 btn.Click += new System.EventHandler(button1_Click);
@@ -103,15 +105,25 @@ namespace WindowsFormsAppMusicPad
                         if (item.note == noteNumber)
                         {
                             playBytton.Text = item.name;
+                            playBytton.Name = item.ButtonName;
                             button1_Click(playBytton, new EventArgs());
                             foreach (Button btn in panel1.Controls)
                             {
-                                if (btn.Name == item.ButtonName)
+                                if (btn.Name == playBytton.Name)
                                 {
                                     btn.Focus();
                                     return;
                                 }
                             }
+                            if (isPadsFormOpen)
+                                foreach (Button btn in Pads.tableLayoutPanelPads.Controls)
+                                {
+                                    if (btn.Name == playBytton.Name)
+                                    {
+                                        btn.Focus();
+                                        return;
+                                    }
+                                }
                         }
                     }
                 });
@@ -125,7 +137,7 @@ namespace WindowsFormsAppMusicPad
                     label3.Invoke((MethodInvoker)delegate ()
                     {
                         float v = cce.ControllerValue;
-                        Player1.settings.volume = Player2.settings.volume = trackBar1.Value = volume = (int)(v/1.27);
+                        Player1.settings.volume = Player2.settings.volume = trackBar1.Value = volume = (int)(v / 1.27);
                         label3.Text = (volume).ToString();
                     });
                 }
@@ -153,13 +165,74 @@ namespace WindowsFormsAppMusicPad
 
         public static void button1_DragDrop(object sender, DragEventArgs e)
         {
-            var res = trackNames.Find(track => track.note == byte.Parse((sender as Button).AccessibleName));
-            if (res != null)
-                trackNames.Remove(res);
+            try
+            {
+                string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
+                int note = int.Parse((sender as Button).AccessibleName);
+                if (file.Length == 1)
+                {
+                    trackNames.Add(new TrackName(file[0], (sender as Button).Name, note));
+                    (sender as Button).Text = Path.GetFileNameWithoutExtension(file[0]);
+                    return;
+                }
 
-            string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
-            trackNames.Add(new TrackName(file[0], (sender as Button).Name, byte.Parse((sender as Button).AccessibleName)));
-            (sender as Button).Text = Path.GetFileNameWithoutExtension(file[0]);
+                if (note >= 48 && note <= 72)
+                {
+                    if (note + (file.Length - 1) > 72)
+                    {
+                        var res = MessageBox.Show((note + (file.Length - 1) - 72) + " tracks did not fit on the keyboard", "Do you want continue?", MessageBoxButtons.YesNo);
+                        if (res == DialogResult.No) return;
+                    }
+                    for (int i = 0; i < file.Length; i++)
+                    {
+                        var res = trackNames.Find(track => track.note == (note + i));
+                        if (res != null)
+                            trackNames.Remove(res);
+                    }
+
+                    for (int i = 0; i < file.Length; i++)
+                    {
+                        trackNames.Add(new TrackName(file[i], "button" + (note + i), note + i));
+                        foreach (var item in panel1.Controls)
+                        {
+                            if (int.Parse((item as Button).AccessibleName) == note + i)
+                            {
+                                (item as Button).Text = Path.GetFileNameWithoutExtension(file[i]);
+                            }
+                        }
+                    }
+                }
+                else if (note >= 74 && note <= 88)
+                {
+                    if ((note + file.Length - 1) > 88)
+                    {
+                        var res = MessageBox.Show((note + (file.Length - 1) - 88) + " tracks did not fit on the PADS", "Do you want continue?", MessageBoxButtons.YesNo);
+                        if (res == DialogResult.No) return;
+                    }
+                    for (int i = 0; i < file.Length; i++)
+                    {
+                        var res = trackNames.Find(track => track.note == (note + i));
+                        if (res != null)
+                            trackNames.Remove(res);
+                    }
+
+                    for (int i = 0; i < file.Length; i++)
+                    {
+                        trackNames.Add(new TrackName(file[i], "button" + (note + i), note + i));
+                        foreach (var item in Pads.tableLayoutPanelPads.Controls)
+                        {
+                            if (int.Parse((item as Button).AccessibleName) == note + i)
+                            {
+                                (item as Button).Text = Path.GetFileNameWithoutExtension(file[i]);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public static void button1_Click(object sender, EventArgs e)
@@ -324,6 +397,14 @@ namespace WindowsFormsAppMusicPad
                                     value.Text = item.name;
                             }
                         }
+                        if (isPadsFormOpen)
+                            foreach (var pad in Pads.tableLayoutPanelPads.Controls)
+                            {
+                                if ((pad as Button).Name == item.ButtonName)
+                                {
+                                    (pad as Button).Text = item.name;
+                                }
+                            }
                     }
                 }
             }
@@ -387,5 +468,38 @@ namespace WindowsFormsAppMusicPad
             }
         }
 
+        private void clearKeyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            foreach (var item in panel1.Controls)
+                if (item is Button)
+                {
+                    var res = trackNames.Find(track => track.ButtonName == (item as Button).Name);
+                    trackNames.Remove(res);
+                    (item as Button).Text = "";
+                }
+
+        }
+
+        private void clearPadsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (isPadsFormOpen)
+            {
+                foreach (var pad in Pads.tableLayoutPanelPads.Controls)
+                {
+                    var res = trackNames.Find(track => track.ButtonName == (pad as Button).Name);
+                    trackNames.Remove(res);
+                    (pad as Button).Text = "";
+                }
+            }
+            else
+            {
+                for (int i = 74; i < 89; i++)
+                {
+                    var res = trackNames.Find(track => track.note == i);
+                    trackNames.Remove(res);
+                }
+            }
+        }
     }
 }
